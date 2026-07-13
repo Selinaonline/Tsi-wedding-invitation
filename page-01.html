@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tsion & Dave Wedding</title>
 
     <style>
       html,
       body {
+        width:100%;
+        overflow-x:hidden;
         margin: 0;
         padding: 0;
       }
@@ -637,6 +639,68 @@
           transform: translateY(0);
         }
       }
+      @media (max-width: 600px) {
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .container,
+  section {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+}
+      @media (max-width: 600px) {
+
+  .foot {
+    width: 100%;
+    padding: 30px 15px;
+  }
+
+  .closing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .Bride-info,
+  .groom-info {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .made {
+    order: 3;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .insta a,
+  .phone a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .insta img {
+    width: 20px;
+    height: 20px;
+  }
+
+}
     </style>
   </head>
 
@@ -1029,7 +1093,7 @@
           Bride Contact
           <p class="insta">
             <a href="https://www.instagram.com/tsi_meseret/">
-              <img class="insta" src="insta.jpg" alt="Instagram" />
+             
               <i class="fa-brands fa-instagram insta"></i>
               @tsi_meseret
             </a>
