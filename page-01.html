@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tsion & Dave Wedding</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      .verse {
+        width: 100%;
+        max-width: 600px;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .back {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1400px;
+        margin: auto 0;
+      }
+
+      .greet-01 {
+        width: 800px;
+        margin-top: -50px;
+        height: 900px;
+        margin-left: 400px;
+        top: 0;
+      }
+
+      .our-story {
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .storyy {
+        font-size: 50px;
+        font-weight: bold;
+        color: rgb(114, 164, 114);
+        margin-left: 90px;
+        margin-top: 70px;
+      }
+
+      .thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .gallery {
+        width: 90%;
+        max-width: 800px;
+        margin: 150px auto 0;
+
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 200px 200px;
+        gap: 10px;
+      }
+
+      .big-box {
+        grid-row: span 2;
+      }
+
+      .big,
+      .small {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .small-box {
+        position: relative;
+      }
+
+      .more {
+        position: absolute;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+
+        font-size: 45px;
+        font-weight: bold;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 12px;
+        cursor: pointer;
+
+        z-index: 5;
+      }
+      .side {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .bottom-small img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      /* VIEWER (FIX ADDED) */
+      #viewer {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+      }
+      .viewer-track {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .viewer-track img {
+        width: 100vw;
+        height: 80vh;
+        object-fit: contain;
+        flex: 0 0 100vw;
+        scroll-snap-align: center;
+      }
+      .viewer-track::-webkit-scrollbar {
+        display: none;
+      }
+
+      .viewer-track img.active {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        z-index: 9999;
+      }
+      #viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+      }
+      #fullCountdown {
+        display: flex;
+        justify-content: center;
+        font-size: 26px;
+        gap: 20px;
+        color: #506345;
+        flex-wrap: wrap;
+        margin-top: 50px;
+        margin-left: 25px;
+      }
+
+      .title {
+        font-family: "Playfair Display", serif;
+        font-size: 38px;
+        margin-bottom: 20px;
+        color: #506345;
+        margin-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 150px;
+      }
+
+      /* COUNTDOWN */
+      .countdown {
+        font-size: 26px;
+        color: #e2a919;
+        margin-top: 80px;
+      }
+
+      .secret-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+      .timeline {
+        position: relative;
+        max-width: 600px;
+        margin: auto;
+        padding: 40px 0;
+      }
+
+      /* vertical line (now left side instead of center) */
+      .timeline::before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        background: #506345;
+        top: 0;
+        bottom: 0;
+        left: 20px; /* 👈 THIS is the key change */
+      }
+      .t-item {
+        width: 100%;
+        padding-left: 60px; /* space from line */
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .t-item .content {
+        margin-left: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #506345;
+        backdrop-filter: blur(8px);
+      }
+
+      /* DOT */
+      .dot {
+        width: 14px;
+        margin-right: 20px;
+        height: 14px;
+        background: #506345;
+        border-radius: 50%;
+        position: absolute;
+        top: 25px;
+        z-index: 2;
+        box-shadow: 0 0 10px #506345;
+      }
+
+      /* CALENDAR */
+      .calendar {
+        display: inline-block;
+        width: 400px;
+        padding: 20px;
+        border: 2px solid #2e2d2b;
+        border-radius: 15px;
+        font-size: 21px;
+        background-color: black;
+        color: black;
+      }
+      .month,
+      .weekdays,
+      .days {
+        color: rgb(6, 6, 6);
+        font-size: 25px;
+      }
+      .calendar-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .calendar {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
+        width: 320px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .month {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #506345;
+      }
+
+      .weekdays,
+      .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .weekdays div {
+        opacity: 0.7;
+        padding: 5px 0;
+      }
+
+      .days div {
+        padding: 8px 0;
+        margin: 2px;
+        border-radius: 8px;
+      }
+
+      /* highlight wedding day */
+      .wedding-day {
+        background: #506345;
+        color: #0b0b0b;
+        font-weight: bold;
+      }
+      .Location {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+      }
+      .title-L {
+        font-size: 40px;
+        margin-bottom: 40px;
+      }
+      .map {
+        height: 350px;
+        width: 90%;
+        max-width: 700px;
+      }
+      /* RSVP */
+      .btn {
+        padding: 12px 25px;
+        border: 1px solid #506345;
+        color: #506345;
+        background: transparent;
+        cursor: pointer;
+      }
+      .confirmation {
+        font-size: 18px;
+        margin-bottom: 20px;
+        margin-left: 150px;
+        color: #444;
+      }
+      .btn:hover {
+        background: #506345;
+        color: black;
+      }
+      .rsvp-box {
+        max-width: 500px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .rsvp-box input,
+      .rsvp-box textarea {
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+      }
+      .rsvp-attend {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 50px;
+      }
+      textarea {
+        min-height: 100px;
+      }
+      .rsvp-attend .title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 35px;
+        font-style: italic;
+        color: #506345;
+        letter-spacing: 1px;
+        margin-left: 50px;
+        margin-bottom: 60px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: flex-start;
+        gap: 150px;
+        margin-top: 25px;
+      }
+
+      .row label {
+        display: flex;
+        align-items: center;
+        width: 180px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        color: #506345;
+      }
+
+      .row input[type="radio"] {
+        margin-right: 10px;
+      }
+      .secret-box {
+        margin-top: 15px;
+        padding: 20px;
+        border-radius: 15px;
+        background: rgba(212, 175, 55, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        backdrop-filter: blur(10px);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.6s ease;
+      }
+
+      .secret-box.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .seal {
+        font-size: 14px;
+        color: #506345;
+        margin-bottom: 10px;
+        animation: glow 1.5s infinite alternate;
+      }
+
+      .secret-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+      .timeline {
+        position: relative;
+        max-width: 600px;
+        margin: auto;
+        padding: 40px 0;
+      }
+      .join-line {
+        text-align: center;
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .made {
+        font-size: 15px;
+        margin-left: 600px;
+        color: rgb(24, 23, 23);
+        margin-top: 140px;
+        margin-left: 100px;
+      }
+      .verse-arch {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        transform: translateX(50px);
+      }
+
+      .verse-arch svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .verse-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 40px;
+        font-style: italic;
+        fill: #506345;
+        letter-spacing: 1px;
+      }
+      .psalm {
+        text-align: center;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-style: italic;
+        color: #506345;
+        margin-top: -150px;
+        position: relative;
+        margin-left: 40px;
+        z-index: 2;
+      }
+      .greet {
+        margin-top: 100px;
+      }
+      .closing-line {
+        margin-bottom: 120px;
+      }
+      /* Bride on the left */
+      .bride-info a,
+      .groom-info a {
+        display: block;
+        color: rgb(239, 228, 228);
+        text-decoration: none;
+        font-size: 22px;
+        margin: 10px 0;
+        transition: 0.3s ease;
+      }
+
+      /* Align only the icons inside the links */
+      .bride-info a i,
+      .groom-info a i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        margin-right: 8px;
+        color: #d4a373;
+      }
+      .foot {
+        display: flex;
+        flex-direction: row;
+        height: 180px;
+        align-items: center;
+        border-color: black;
+        background-color: #506345;
+        border-radius: 12px;
+      }
+      .closing {
+        display: flex;
+
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .Bride-info {
+        color: rgb(24, 23, 23);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        margin-top: 20px;
+        margin-left: 40px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 20px;
+      }
+      .groom-info {
+        color: rgb(24, 23, 23);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        margin-top: 20px;
+        font-weight: 600;
+        margin-right: 60px;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+      .insta {
+        height: 17px;
+        margin-left: 0;
+        margin-right: 10px;
+        margin-top: 8px;
+        border-radius: 4px;
+      }
+      .insta a {
+        color: rgb(24, 23, 23);
+        text-decoration: none;
+        padding-bottom: 5px;
+        font-size: 18px;
+      }
+      .Bride-info a:hover,
+      .groom-info a:hover {
+        color: #f7faf4;
+        transform: translateY(-2px);
+      }
+      .phone a {
+        color: rgb(24, 23, 23);
+        text-decoration: none;
+      }
+      .success-message {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: #506345;
+        color: #f7faf4;
+        text-align: center;
+        font-size: 18px;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .success-message.show {
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .storyy {
+          font-size: 35px;
+          margin-left: 0;
+        }
+
+        .title {
+          font-size: 32px;
+        }
+
+        .map {
+          width: 95%;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <audio id="bgMusic" src="Lamesginih -Zema-4-Christ.m4a"></audio>
+    <div class="background">
+      <img class="back" src="Tsion (3).png" />
+    </div>
+
+    <div class="overlay">
+      <div class="verse-arch">
+        <svg viewBox="0 0 2600 500">
+          <defs>
+            <path id="arch" d="M100,400 Q1440,-200 2500,490" />
+          </defs>
+
+          <text class="verse-text">
+            <textPath href="#arch" startOffset="50%" text-anchor="middle">
+              This is the day which the LORD hath made; we will rejoice and be
+              glad in it.
+            </textPath>
+          </text>
+        </svg>
+      </div>
+      <p class="psalm">Psalms 118:24</p>
+    </div>
+    <div class="greet"><img class="greet-01" src="Tsion (4).png" /></div>
+
+    <!-- STORY SECTION -->
+    <section class="our-story">
+      <h2 class="storyy">Our Story</h2>
+      <p
+        style="
+          max-width: 700px;
+          margin: auto;
+          font-size: 18px;
+          color: #506345;
+          line-height: 1.9;
+          margin-left: 440px;
+          margin-top: 20px;
+        "
+      >
+        From the first moment we met to this beautiful journey, every step has
+        been a memory we cherish. This is a small glimpse of our story together.
+      </p>
+    </section>
+
+    <!-- TIMELINE SECTION -->
+    <section style="padding: 100px 20px">
+      <!-- FIRST MEET -->
+      <div
+        style="
+          max-width: 1000px;
+          margin: auto;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 60px;
+          margin-bottom: 100px;
+        "
+      >
+        <!-- IMAGE -->
+        <div style="flex: 1; min-width: 280px">
+          <img
+            src="firstmeet.jpg"
+            style="
+              width: 100%;
+              height: 380px;
+              object-fit: cover;
+              border-radius: 18px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            "
+          />
+        </div>
+
+        <!-- TEXT -->
+        <div style="flex: 1; min-width: 280px">
+          <h2 style="color: rgb(114, 164, 114); font-size: 32px">
+            🌍 First Meet
+          </h2>
+          <p style="font-size: 18px; line-height: 1.6; color: #506345">
+            It all started from a simple moment that turned into something
+            meaningful.
+          </p>
+        </div>
+      </div>
+
+      <!-- GROWING TOGETHER -->
+      <div
+        style="
+          max-width: 1000px;
+          margin: auto;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 60px;
+          flex-direction: row-reverse;
+          margin-bottom: 100px;
+        "
+      >
+        <!-- IMAGE -->
+        <div style="flex: 1; min-width: 280px">
+          <img
+            src="growinlove.jpg"
+            style="
+              width: 100%;
+              height: 380px;
+              object-fit: cover;
+              border-radius: 18px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            "
+          />
+        </div>
+
+        <!-- TEXT -->
+        <div style="flex: 1; min-width: 280px">
+          <h2 style="color: rgb(114, 164, 114); font-size: 32px">
+            ❤️ Growing Together
+          </h2>
+          <p style="font-size: 18px; line-height: 1.6; color: #506345">
+            We learned, laughed, and built something stronger every day.
+          </p>
+        </div>
+      </div>
+
+      <!-- PROPOSAL -->
+      <div
+        style="
+          max-width: 1000px;
+          margin: auto;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 60px;
+        "
+      >
+        <!-- IMAGE -->
+        <div style="flex: 1; min-width: 280px">
+          <img
+            src="proposal.png"
+            style="
+              width: 100%;
+              height: 380px;
+              object-fit: cover;
+              border-radius: 18px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            "
+          />
+        </div>
+
+        <!-- TEXT -->
+        <div style="flex: 1; min-width: 280px">
+          <h2 style="color: rgb(114, 164, 114); font-size: 32px">
+            💍 Proposal
+          </h2>
+          <p style="font-size: 18px; line-height: 1.6; color: #506345">
+            The moment everything became forever.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="title">Countdown To The Wedding</div>
+
+      <div id="fullCountdown"></div>
+    </section>
+    <div class="gallery">
+      <div class="big-box">
+        <img src="1.JPG" class="thumb big" data-index="0" />
+      </div>
+
+      <div class="small-box">
+        <img src="2.JPG" class="thumb small" data-index="1" />
+
+        <div class="more" onclick="openViewer(0)">+</div>
+      </div>
+
+      <div class="small-box">
+        <img src="3.JPG" class="thumb small" data-index="2" />
+      </div>
+    </div>
+
+    <!-- COUNTDOWN PLACEHOLDER -->
+
+    <section>
+      <section>
+        <div class="title">Wedding Timeline</div>
+
+        <div class="timeline">
+          <div class="t-item left">
+            <div class="dot"></div>
+            <div class="content">
+              💒 Ceremony<br />
+              <span>10:00 AM</span>
+            </div>
+          </div>
+
+          <div class="t-item right">
+            <div class="dot"></div>
+            <div class="content">
+              📸 Photos Session<br />
+              <span>11:30 AM</span>
+            </div>
+          </div>
+
+          <div class="t-item left">
+            <div class="dot"></div>
+            <div class="content">
+              🍽️ Dinner<br />
+              <span>1:00 PM</span>
+            </div>
+          </div>
+
+          <div class="t-item right">
+            <div class="dot"></div>
+            <div class="content">
+              💃 Celebration Party<br />
+              <span>3:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div class="title">Save The Date</div>
+
+        <div class="calendar-wrapper">
+          <div class="calendar">
+            <div class="month">August 2026</div>
+
+            <div class="weekdays">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+
+            <div class="days">
+              <!-- empty spacing (August 2026 starts mid-week style) -->
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="wedding-day">1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+              <div>5</div>
+              <div>6</div>
+              <div>7</div>
+              <div>8</div>
+              <div>9</div>
+              <div>10</div>
+              <div>11</div>
+              <div>12</div>
+              <div>13</div>
+              <div>14</div>
+              <div>15</div>
+              <div>16</div>
+              <div>17</div>
+              <div>18</div>
+              <div>19</div>
+
+              <!-- WEDDING DAY -->
+              <div>20</div>
+
+              <div>21</div>
+              <div>22</div>
+              <div>23</div>
+              <div>24</div>
+              <div>25</div>
+              <div>26</div>
+              <div>27</div>
+              <div>28</div>
+              <div>29</div>
+              <div>30</div>
+              <div>31</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <!-- MAP -->
+    <section>
+      <div class="Location">
+        <div class="title-L">Location</div>
+        <div class="map">
+          <iframe
+            src="https://maps.google.com/maps?q=Addis%20Ababa&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style="border: 0"
+          >
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section>
+      <section>
+        <div class="rsvp-attend">
+          <p class="title">Please confirm your attendance</p>
+        </div>
+
+        <div class="rsvp-box">
+          <input type="text" id="name" placeholder="Full Name" />
+
+          <div class="row">
+            <label>
+              <input type="radio" name="attend" value="Yes" /> Yes, I will
+              attend
+            </label>
+
+            <label>
+              <input type="radio" name="attend" value="No" /> No, I can't attend
+            </label>
+          </div>
+
+          <div class="row">
+            <label>
+              <input
+                type="radio"
+                name="side"
+                value="Bride"
+                onclick="checkSide()"
+              />
+              Bride Family
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="side"
+                value="Groom"
+                onclick="checkSide()"
+              />
+              Groom Family
+            </label>
+          </div>
+
+          <!-- FUN QUESTION (hidden by default) -->
+          <div id="funQuestion" class="secret-box hidden">
+            <div class="seal">🔒 Secret Question Unlocked</div>
+            <p class="secret-title">A little fun question for you 💛</p>
+
+            <p id="questionText">What is the bride’s most beautiful quality?</p>
+
+            <input type="text" id="funAnswer" placeholder="Your answer..." />
+          </div>
+
+          <textarea
+            id="message"
+            placeholder="Message for the couple"
+          ></textarea>
+
+          <button class="btn" onclick="submitRSVP()">Submit</button>
+        </div>
+      </section>
+      <div id="successMessage" class="success-message">
+        ❤️ Thank you! Your wishes have been submitted successfully.
+      </div>
+    </section>
+    <!-- FOOTER -->
+    <section>
+      <div class="join-line">
+        <div class="title">Join Us</div>
+        <p class="closing-line">
+          We would be honored to have you with us on our special day.<br />
+          Location: Addis Ababa, Ethiopia
+        </p>
+      </div>
+    </section>
+    <div id="viewer">
+      <div class="close" onclick="closeViewer()">×</div>
+      <div class="viewer-track" id="track"></div>
+    </div>
+
+    <!-- FIX: VIEWER ADDED -->
+    <div class="foot">
+      <div class="closing">
+        <div class="Bride-info">
+          Bride Contact
+          <p class="insta">
+            <a href="https://www.instagram.com/tsi_meseret/">
+              <img class="insta" src="insta.jpg" alt="Instagram" />
+              <i class="fa-brands fa-instagram insta"></i>
+              @tsi_meseret
+            </a>
+          </p>
+          <p class="phone">
+            <a href="tel:+251911234567">
+              <i class="fa-solid fa-phone"></i> 📞 +251923112148
+            </a>
+          </p>
+        </div>
+        <p class="made">© 2026 Tsion & Dave Wedding. Made with ❤️</p>
+        <div class="groom-info">
+          Groom Contact
+          <p class="insta">
+            <a href="https://www.instagram.com/davedc_d/">
+              <img class="insta" src="insta.jpg" alt="Instagram" />
+              @davedc_d
+            </a>
+          </p>
+          <p class="phone">
+            <a href="tel:+251911234567">
+              <i class="fa-solid fa-phone"></i> 📞 +251923112148
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      window.addEventListener("load", () => {
+        const music = document.getElementById("bgMusic");
+
+        if (localStorage.getItem("playMusic") === "yes") {
+          music
+            .play()
+            .then(() => {
+              console.log("Music started ❤️");
+            })
+            .catch((error) => {
+              console.log("Music blocked:", error);
+            });
+        }
+      });
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCdbD2OVFGhxwKIwjReJTk01N37OsxDZ-E",
+        authDomain: "wedding-invitation-94bd4.firebaseapp.com",
+        projectId: "wedding-invitation-94bd4",
+        storageBucket: "wedding-invitation-94bd4.firebasestorage.app",
+        messagingSenderId: "408958967087",
+        appId: "1:408958967087:web:664a8b3954ab05d89f95da",
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      const db = getFirestore(app);
+      const viewer = document.getElementById("viewer");
+      const track = document.getElementById("track");
+
+      const images = [
+        "1.JPG",
+        "2.JPG",
+        "3.JPG",
+        "4.JPG",
+        "5.JPG",
+        "6.JPG",
+        "7.JPG",
+        "8.JPG",
+        "9.JPG",
+        "10.JPG",
+        "11.JPG",
+        "12.JPG",
+        "13.JPG",
+      ];
+
+      let currentIndex = 0;
+      const gridImages = document.querySelectorAll(".thumb");
+
+      /* =========================
+   IMAGE VIEWER
+========================= */
+
+      function openViewer(index) {
+        currentIndex = index;
+
+        viewer.style.display = "block";
+        document.body.style.overflow = "hidden";
+
+        buildViewer();
+
+        scrollToImage(index);
+      }
+
+      function closeViewer() {
+        viewer.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      function buildViewer() {
+        track.innerHTML = "";
+
+        images.forEach((src, i) => {
+          const img = document.createElement("img");
+          img.src = src;
+
+          if (i === currentIndex) img.classList.add("active");
+
+          track.appendChild(img);
+        });
+
+        enableScrollTracking();
+      }
+
+      function scrollToImage(index) {
+        const imgs = track.querySelectorAll("img");
+        const target = imgs[index];
+        if (!target) return;
+
+        target.scrollIntoView({
+          inline: "center",
+        });
+      }
+
+      function enableScrollTracking() {
+        track.onscroll = () => {
+          requestAnimationFrame(() => {
+            const imgs = track.querySelectorAll("img");
+
+            let closestIndex = 0;
+            let minDist = Infinity;
+
+            imgs.forEach((img, i) => {
+              const rect = img.getBoundingClientRect();
+              const center = rect.left + rect.width / 2;
+              const dist = Math.abs(window.innerWidth / 2 - center);
+
+              if (dist < minDist) {
+                minDist = dist;
+                closestIndex = i;
+              }
+            });
+
+            imgs.forEach((img) => img.classList.remove("active"));
+
+            if (imgs[closestIndex]) {
+              imgs[closestIndex].classList.add("active");
+            }
+
+            currentIndex = closestIndex;
+          });
+        };
+      }
+
+      /* =========================
+   CLICK HANDLERS
+========================= */
+
+      gridImages.forEach((img, index) => {
+        img.addEventListener("click", () => openViewer(index));
+      });
+
+      if (viewer) {
+        viewer.addEventListener("click", (e) => {
+          if (e.target === viewer) closeViewer();
+        });
+      }
+
+      /* =========================
+   COUNTDOWN (SAFE)
+========================= */
+
+      const weddingDate = new Date("2026-08-01T10:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        let diff = weddingDate - now;
+
+        if (diff <= 0) {
+          document.getElementById("fullCountdown").innerHTML =
+            "🎉 The day has arrived!";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("fullCountdown").innerHTML =
+          days +
+          " days : " +
+          hours +
+          " hours : " +
+          minutes +
+          " minutes : " +
+          seconds +
+          " seconds";
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      updateCountdown();
+      function checkSide() {
+        const side = document.querySelector('input[name="side"]:checked').value;
+        const funBox = document.getElementById("funQuestion");
+
+        if (side === "Bride") {
+          funBox.classList.add("show");
+          funBox.classList.remove("hidden");
+        } else {
+          funBox.classList.remove("show");
+          setTimeout(() => {
+            funBox.classList.add("hidden");
+          }, 300);
+        }
+      }
+      function scrollLeft() {
+        document.getElementById("carousel").scrollBy({
+          left: -400,
+          behavior: "smooth",
+        });
+      }
+
+      async function submitRSVP() {
+        let name = document.getElementById("name").value;
+
+        let attend = document.querySelector('input[name="attend"]:checked');
+
+        let side = document.querySelector('input[name="side"]:checked');
+
+        let funAnswer = document.getElementById("funAnswer").value;
+
+        let message = document.getElementById("message").value;
+
+        if (name === "" || !attend || !side) {
+          alert("Please complete the required fields.");
+          return;
+        }
+
+        let rsvpData = {
+          name: name,
+
+          attendance: attend.value,
+
+          side: side.value,
+
+          funAnswer: funAnswer,
+
+          message: message,
+        };
+
+        await addDoc(collection(db, "rsvps"), rsvpData);
+
+        document.getElementById("successMessage").classList.add("show");
+
+        document.getElementById("name").value = "";
+        document.getElementById("message").value = "";
+      }
+      window.checkSide = checkSide;
+      window.submitRSVP = submitRSVP;
+      window.openViewer = openViewer;
+      window.closeViewer = closeViewer;
+    </script>
+  </body>
+</html>

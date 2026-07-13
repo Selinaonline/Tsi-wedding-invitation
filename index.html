@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tsion & Dave Wedding</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #efe2d3;
+        font-family: Georgia, serif;
+        opacity: 1;
+        transition: opacity 1s;
+      }
+      body.fade-out {
+        opacity: 0;
+      }
+
+      /* 🌸 PETALS */
+      .petal {
+        position: absolute;
+        top: -10vh;
+        width: 10px;
+        height: 10px;
+        background: #8b1e2f;
+        border-radius: 50% 20% 50% 20%;
+        opacity: 0.6;
+        animation: fall linear infinite;
+        filter: blur(0.4px);
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translate(0, -10vh) rotate(0deg);
+        }
+        50% {
+          transform: translate(40px, 60vh) rotate(180deg);
+        }
+        100% {
+          transform: translate(-30px, 120vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* 🌫 BACKGROUND */
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(139, 30, 47, 0.12),
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at bottom left,
+            rgba(212, 175, 55, 0.12),
+            transparent 60%
+          );
+      }
+
+      /* 🧾 PAPER */
+      .paper {
+        padding: 15px;
+        background: #f6eee4;
+        border-radius: 40px;
+        box-shadow:
+          0 60px 120px rgba(0, 0, 0, 0.18),
+          inset 0 0 20px rgba(255, 255, 255, 0.5);
+        position: relative;
+        width: 520px;
+        height: 740px;
+        padding: 10px;
+      }
+
+      /* 🎴 CARD */
+
+      .card {
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        position: relative;
+        overflow: visible;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+
+        border: 1px solid rgba(212, 175, 55, 0.25);
+
+        transition:
+          transform 0.8s ease,
+          opacity 0.8s ease;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+
+        border: 1px solid rgba(212, 175, 55, 0.35);
+
+        box-shadow:
+          inset 0 0 40px rgba(0, 0, 0, 0.2),
+          inset 0 0 20px rgba(212, 175, 55, 0.15);
+
+        pointer-events: none;
+      }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+
+        box-shadow:
+          inset 0 0 30px rgba(0, 0, 0, 0.25),
+          inset 0 0 15px rgba(212, 175, 55, 0.12);
+
+        pointer-events: none;
+      }
+      /* OPEN ANIMATION */
+      .card.open {
+        transform: scale(1.08);
+        opacity: 0;
+      }
+
+      /* ✨ CORNERS */
+      .corner {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border: 2px solid #d4af37;
+        opacity: 0.7;
+      }
+
+      .tl {
+        top: 20px;
+        left: 20px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .tr {
+        top: 20px;
+        right: 20px;
+        border-left: none;
+        border-bottom: none;
+      }
+      .bl {
+        bottom: 20px;
+        left: 20px;
+        border-right: none;
+        border-top: none;
+      }
+      .br {
+        bottom: 20px;
+        right: 20px;
+        border-left: none;
+        border-top: none;
+      }
+
+      /* 📜 CONTENT */
+      .content {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border-radius: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+      }
+
+      /* IMAGE */
+      .pic-01 {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        display: block; /* removes tiny gaps */
+        border-radius: 0; /* IMPORTANT */
+      }
+      .content::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 0, 0, 0) 55%,
+          rgba(0, 0, 0, 0.35) 100%
+        );
+
+        pointer-events: none;
+      }
+      .content::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 0, 0, 0) 40%,
+          rgba(0, 0, 0, 0.25) 100%
+        );
+
+        mix-blend-mode: multiply;
+      }
+
+      .names {
+        font-size: 42px;
+        margin-bottom: 10px;
+      }
+
+      .title {
+        font-size: 16px;
+        letter-spacing: 4px;
+        color: #d4af37;
+      }
+
+      .line {
+        width: 90px;
+        height: 1px;
+        background: #d4af37;
+        margin: 15px 0;
+      }
+
+      .invited {
+        font-size: 18px;
+        margin-top: 10px;
+      }
+
+      .small {
+        font-size: 14px;
+        margin-top: 25px;
+        opacity: 0.9;
+      }
+
+      /* 🌸 SEAL WRAPPER (CENTER + HELD EFFECT) */
+      .seal-wrapper {
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        z-index: 999;
+      }
+      /* side “held” lines */
+      .seal-line {
+        width: 70px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #d4af37);
+        opacity: 0.8;
+      }
+
+      .seal-line.right {
+        background: linear-gradient(to left, transparent, #d4af37);
+      }
+
+      /* 🔻 SEAL */
+      .seal {
+        width: 85px;
+        height: 85px;
+
+        background: radial-gradient(circle at 30% 30%, #d14b5f, #5e1720 70%);
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: #d4af37;
+        font-size: 22px;
+        font-weight: bold;
+
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border: 3px solid rgba(212, 175, 55, 0.4);
+
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        position: relative;
+      }
+
+      .seal:active {
+        transform: scale(0.85);
+      }
+
+      /* shine */
+      .seal::after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 60%;
+        top: 15%;
+        left: 20%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+        border-radius: 50%;
+      }
+      .front-pic {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg"></div>
+
+    <!-- 🌸 PETALS -->
+    <script>
+      for (let i = 0; i < 60; i++) {
+        let p = document.createElement("div");
+        p.className = "petal";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = 6 + Math.random() * 6 + "s";
+        p.style.animationDelay = Math.random() * 5 + "s";
+        p.style.opacity = Math.random() * 0.6;
+        p.style.width = 6 + Math.random() * 10 + "px";
+        p.style.height = p.style.width;
+        document.body.appendChild(p);
+      }
+      function openInvitation() {
+        const card = document.querySelector(".card");
+        const seal = document.querySelector(".seal");
+        const music = document.getElementById("bgMusic");
+
+        // start music
+        music.play();
+        // seal press effect
+        seal.style.transform = "scale(0.85)";
+        seal.style.transition = "0.2s";
+
+        // open animation
+        setTimeout(() => {
+          card.classList.add("open");
+        }, 200);
+
+        // go to next
+        setTimeout(() => {
+          localStorage.setItem("playMusic", "yes");
+          window.location.href = "page-01.html";
+        }, 1100);
+      }
+    </script>
+
+    <audio id="bgMusic" loop>
+      <source src="Lamesginih -Zema-4-Christ.m4a" type="audio/mp4" />
+    </audio>
+
+    <div class="paper">
+      <div class="card">
+        <div class="content">
+          <div class="front-pic">
+            <img class="pic-01" src="upnew-pic.png" />
+          </div>
+        </div>
+
+        <!-- 🌹 CENTER HELD SEAL -->
+        <div class="seal-wrapper">
+          <div class="seal-line"></div>
+
+          <div class="seal" onclick="openInvitation()">T & D</div>
+
+          <div class="seal-line right"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

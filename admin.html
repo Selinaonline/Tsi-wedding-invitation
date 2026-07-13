@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Wedding Admin</title>
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      font-family: "Georgia", serif;
+
+      background: linear-gradient(135deg, #fff8f0, #f7e1c3);
+
+      color: #4a2c20;
+    }
+
+    /* LOGIN */
+
+    .admin-login {
+      height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+    }
+
+    .admin-card {
+      width: 350px;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background: rgba(255, 255, 255, 0.75);
+
+      border-radius: 25px;
+
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+      backdrop-filter: blur(10px);
+    }
+
+    .heart {
+      font-size: 45px;
+    }
+
+    .admin-card h1 {
+      margin-bottom: 10px;
+    }
+
+    .admin-card p {
+      color: #8b6b52;
+    }
+
+    .admin-card input {
+      width: 90%;
+
+      padding: 14px;
+
+      margin: 20px 0;
+
+      border-radius: 30px;
+
+      border: 1px solid #d6b48a;
+
+      font-size: 16px;
+    }
+
+    .admin-card button {
+      padding: 14px 35px;
+
+      border: none;
+
+      border-radius: 30px;
+
+      background: #b88945;
+
+      color: white;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+    }
+
+    .admin-card button:hover {
+      background: #8d632b;
+
+      transform: translateY(-3px);
+    }
+
+    /* DASHBOARD */
+
+    #dashboard {
+      padding: 40px;
+    }
+
+    .dashboard-header {
+      text-align: center;
+
+      margin-bottom: 40px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 40px;
+
+      color: #9b6a2f;
+    }
+
+    #guestList {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+      gap: 25px;
+    }
+
+    /* GUEST CARD */
+
+    .guest-card {
+      background: white;
+
+      padding: 25px;
+
+      border-radius: 20px;
+
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+      border-top: 5px solid #c59b5c;
+
+      animation: show 0.5s ease;
+    }
+
+    .guest-card h2 {
+      color: #9b6a2f;
+    }
+
+    .guest-card p {
+      line-height: 1.6;
+    }
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 40px;
+      color: #9b6a2f;
+    }
+
+    .dashboard-header h2 {
+      font-size: 30px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: white;
+
+      width: 180px;
+
+      padding: 20px;
+
+      text-align: center;
+
+      border-radius: 20px;
+
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-card h3 {
+      font-size: 35px;
+
+      color: #b88945;
+
+      margin: 0;
+    }
+
+    .stat-card p {
+      margin-top: 10px;
+    }
+    .refresh-btn {
+      background: #b88945;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .refresh-btn:hover {
+      opacity: 0.8;
+    }
+
+    @keyframes show {
+      from {
+        opacity: 0;
+
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <body>
+    <section class="admin-login">
+      <div class="admin-card">
+        <div class="heart">❤️</div>
+
+        <h1>Wedding Guest Book</h1>
+
+        <p>Private Bride & Groom Dashboard</p>
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Enter password"
+        />
+
+        <button onclick="loginAdmin()">Open Dashboard</button>
+      </div>
+    </section>
+
+    <section id="dashboard" style="display: none">
+      <div class="dashboard-header">
+        <h1>❤️ Bride & Groom ❤️</h1>
+
+        <h2>Wedding Guest Book</h2>
+
+        <p>Messages from your loved ones 💌</p>
+      </div>
+      <button onclick="loadGuests()" class="refresh-btn">
+        🔄 Refresh Wishes
+      </button>
+
+      <div class="stats">
+        <div class="stat-card">
+          <h3 id="totalGuests">0</h3>
+          <p>💌 Total Wishes</p>
+        </div>
+
+        <div class="stat-card">
+          <h3 id="attendingGuests">0</h3>
+          <p>✅ Attending</p>
+        </div>
+
+        <div class="stat-card">
+          <h3 id="notAttendingGuests">0</h3>
+          <p>❌ Not Attending</p>
+        </div>
+      </div>
+
+      <div id="guestList"></div>
+    </section>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCdbD2OVFGhxwKIwjReJTk01N37OsxDZ-E",
+        authDomain: "wedding-invitation-94bd4.firebaseapp.com",
+        projectId: "wedding-invitation-94bd4",
+        storageBucket: "wedding-invitation-94bd4.firebasestorage.app",
+        messagingSenderId: "408958967087",
+        appId: "1:408958967087:web:664a8b3954ab05d89f95da",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      const db = getFirestore(app);
+
+      async function loadGuests() {
+        let total = 0;
+        let attending = 0;
+        let notAttending = 0;
+
+        const guestList = document.getElementById("guestList");
+
+        guestList.innerHTML = "";
+
+        const querySnapshot = await getDocs(collection(db, "rsvps"));
+
+        if (querySnapshot.empty) {
+          guestList.innerHTML = `
+        
+        <div class="guest-card">
+
+            <h2>💌 No wishes yet</h2>
+
+            <p>Your guests' messages will appear here ❤️</p>
+
+        </div>
+
+        `;
+
+          return;
+        }
+
+        querySnapshot.forEach((doc) => {
+          let guest = doc.data();
+
+          guestList.innerHTML += `
+
+        <div class="guest-card">
+
+            <h2>💌 ${guest.name}</h2>
+
+            <p>
+            ${guest.attendance === "Yes" ? "✅ Attending" : "❌ Not Attending"}
+            </p>
+
+            <p>
+            👨‍👩‍👧 Side: ${guest.side}
+            </p>
+
+            <p>
+            💛 ${guest.funAnswer}
+            </p>
+
+            <p>
+            "${guest.message}"
+            </p>
+
+        </div>
+
+        `;
+
+          total++;
+
+          if (guest.attendance === "Yes") {
+            attending++;
+          } else {
+            notAttending++;
+          }
+        });
+
+        document.getElementById("totalGuests").innerText = total;
+
+        document.getElementById("attendingGuests").innerText = attending;
+
+        document.getElementById("notAttendingGuests").innerText = notAttending;
+      }
+
+      function loginAdmin() {
+        let password = document.getElementById("adminPassword").value;
+
+        if (password === "wedding2026") {
+          document.querySelector(".admin-login").style.display = "none";
+
+          document.getElementById("dashboard").style.display = "block";
+
+          loadGuests();
+        } else {
+          alert("Wrong password");
+        }
+      }
+
+      window.loginAdmin = loginAdmin;
+    </script>
+  </body>
+</html>
