@@ -163,7 +163,7 @@
         width: 100%;
         overflow-x: scroll;
         overflow-y: hidden;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
       }
 
@@ -179,7 +179,7 @@
       }
 
       .viewer-track img.active {
-        transform: scale(1.05);
+       
         opacity: 1;
       }
 
@@ -1244,36 +1244,36 @@ section div[style*="display: flex"]{
         });
       }
 
-      function enableScrollTracking() {
-        track.onscroll = () => {
-          requestAnimationFrame(() => {
-            const imgs = track.querySelectorAll("img");
+     function enableScrollTracking() {
 
-            let closestIndex = 0;
-            let minDist = Infinity;
+  let timer;
 
-            imgs.forEach((img, i) => {
-              const rect = img.getBoundingClientRect();
-              const center = rect.left + rect.width / 2;
-              const dist = Math.abs(window.innerWidth / 2 - center);
+  track.onscroll = () => {
 
-              if (dist < minDist) {
-                minDist = dist;
-                closestIndex = i;
-              }
-            });
+    clearTimeout(timer);
 
-            imgs.forEach((img) => img.classList.remove("active"));
+    timer = setTimeout(() => {
 
-            if (imgs[closestIndex]) {
-              imgs[closestIndex].classList.add("active");
-            }
+      const index = Math.round(
+        track.scrollLeft / window.innerWidth
+      );
 
-            currentIndex = closestIndex;
-          });
-        };
+      const imgs = track.querySelectorAll("img");
+
+      imgs.forEach(img => {
+        img.classList.remove("active");
+      });
+
+      if(imgs[index]){
+        imgs[index].classList.add("active");
       }
 
+      currentIndex = index;
+
+    }, 100);
+
+  };
+}
       /* =========================
    CLICK HANDLERS
 ========================= */
