@@ -781,7 +781,11 @@ section div[style*="display: flex"]{
   </head>
 
   <body>
-    <audio id="bgMusic" src="Lamesginih -Zema-4-Christ.m4a"></audio>
+    <audio 
+  id="bgMusic" 
+  src="Lamesginih -Zema-4-Christ.m4a"
+  loop>
+</audio>
     <div class="background">
       <img class="back" src="Tsion (3).png" />
     </div>
@@ -1208,6 +1212,14 @@ section div[style*="display: flex"]{
             });
         }
       });
+      music.addEventListener("timeupdate",()=>{
+ localStorage.setItem("musicTime", music.currentTime);
+        const savedTime = localStorage.getItem("musicTime");
+
+if(savedTime){
+ music.currentTime = savedTime;
+}
+});
 
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
       import {
