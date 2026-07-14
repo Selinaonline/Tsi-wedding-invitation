@@ -785,7 +785,8 @@ section div[style*="display: flex"]{
 id="bgMusic" 
 src="Lamesginih -Zema-4-Christ.m4a"
 loop
-></audio>
+      preload="auto">
+</audio>
     <div class="background">
       <img class="back" src="Tsion (3).png" />
     </div>
@@ -1198,38 +1199,45 @@ loop
     </div>
 
     <script type="module">
+const music = document.getElementById("bgMusic");
+
+
 window.addEventListener("load", async () => {
 
- const music = document.getElementById("bgMusic");
+  if(localStorage.getItem("playMusic") === "yes"){
 
- if(localStorage.getItem("playMusic") === "yes"){
+    music.volume = 0.5;
 
-   music.volume = 0.5;
+    let savedTime = localStorage.getItem("musicTime");
 
-   try{
+    if(savedTime){
+      music.currentTime = savedTime;
+    }
+
+    try{
       await music.play();
       console.log("music playing");
-   }
-   catch(err){
-      console.log("browser blocked autoplay", err);
-   }
+    }
+    catch(err){
+      console.log("autoplay blocked", err);
+    }
 
- }
+  }
 
 });
 
 
-  // save position every second
-  setInterval(() => {
+// save music position
+setInterval(() => {
 
-    if (!music.paused) {
-      localStorage.setItem(
-        "musicTime",
-        music.currentTime
-      );
-    }
+  if(!music.paused){
+    localStorage.setItem(
+      "musicTime",
+      music.currentTime
+    );
+  }
 
-  },1000);
+},1000);
 
 
 });
