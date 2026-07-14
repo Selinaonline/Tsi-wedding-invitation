@@ -1198,27 +1198,42 @@ section div[style*="display: flex"]{
     </div>
 
     <script type="module">
-      window.addEventListener("load", () => {
-        const music = document.getElementById("bgMusic");
+window.addEventListener("load", () => {
 
-        if (localStorage.getItem("playMusic") === "yes") {
-          music
-            .play()
-            .then(() => {
-              console.log("Music started ❤️");
-            })
-            .catch((error) => {
-              console.log("Music blocked:", error);
-            });
-        }
+  const music = document.getElementById("bgMusic");
+
+  const savedTime = localStorage.getItem("musicTime");
+
+  if (savedTime) {
+    music.currentTime = Number(savedTime);
+  }
+
+  if (localStorage.getItem("playMusic") === "yes") {
+
+    music.play()
+      .then(() => {
+        console.log("Music continued ❤️");
+      })
+      .catch(err => {
+        console.log("Music blocked", err);
       });
-      music.addEventListener("timeupdate",()=>{
- localStorage.setItem("musicTime", music.currentTime);
-        const savedTime = localStorage.getItem("musicTime");
 
-if(savedTime){
- music.currentTime = savedTime;
-}
+  }
+
+
+  // save position every second
+  setInterval(() => {
+
+    if (!music.paused) {
+      localStorage.setItem(
+        "musicTime",
+        music.currentTime
+      );
+    }
+
+  },1000);
+
+
 });
 
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
