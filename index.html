@@ -349,11 +349,30 @@
         }, 200);
 
         // go to next
-        setTimeout(() => {
-          localStorage.setItem("playMusic", "yes");
-          window.location.href = "page-01.html";
-        }, 1100);
+      // go to next
+setTimeout(() => {
+
+  saveMusic(); // save music position before leaving
+
+  window.location.href = "page-01.html";
+
+}, 1100);
       }
+      function saveMusic(){
+
+  const music = document.getElementById("bgMusic");
+
+  localStorage.setItem(
+    "musicTime",
+    music.currentTime
+  );
+
+  localStorage.setItem(
+    "playMusic",
+    "yes"
+  );
+
+}
     </script>
 
     <audio id="bgMusic" loop>
