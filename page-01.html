@@ -378,14 +378,14 @@ body {
         background: #506345;
         color: black;
       }
-      .rsvp-box {
-        max-width: 500px;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
+ .rsvp-box {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
       .rsvp-box input,
       .rsvp-box textarea {
         padding: 12px;
@@ -412,25 +412,30 @@ body {
         margin-bottom: 60px;
       }
 
-      .row {
-        display: flex;
-        justify-content: flex-start;
-        gap: 150px;
-        margin-top: 25px;
-      }
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 25px auto;
+  gap: 40px;
+}
 
-      .row label {
-        display: flex;
-        align-items: center;
-        width: 180px;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 20px;
-        color: #506345;
-      }
+.row label {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  color: #506345;
+}
 
-      .row input[type="radio"] {
-        margin-right: 10px;
-      }
+.row input[type="radio"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}
       .secret-box {
         margin-top: 15px;
         padding: 20px;
