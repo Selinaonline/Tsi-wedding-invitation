@@ -555,7 +555,7 @@ body {
         justify-content: space-between;
         width: 100%;
       }
-      .Bride-info {
+      .bride-info {
         color: rgb(24, 23, 23);
         display: flex;
         flex-direction: column;
@@ -594,7 +594,7 @@ body {
         padding-bottom: 5px;
         font-size: 18px;
       }
-      .Bride-info a:hover,
+      .bride-info a:hover,
       .groom-info a:hover {
         color: #f7faf4;
         transform: translateY(-2px);
@@ -698,28 +698,32 @@ body {
       @media (max-width: 600px) {
 
   .foot {
-    width: 100%;
-    padding: 30px 15px;
+    width:100%;
+  height:auto;
+  padding:30px 15px;
   }
 
   .closing {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
-    gap: 25px;
+    gap: 10px;
+    width: 100%;
   }
 
-  .Bride-info,
+
+  .bride-info,
   .groom-info {
-    width: 100%;
-    font-size: 18px;
+    width: 50%;
+    margin: 0;
+    font-size: 16px;
   }
 
-  .made {
-    order: 3;
-    font-size: 14px;
-    width: 100%;
+
+ .made {
+    display: none;
   }
 
   .insta a,
@@ -727,12 +731,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
+        font-size: 14px;
   }
 
   .insta img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
 }
@@ -1155,7 +1160,7 @@ section div[style*="display: flex"]{
     <!-- FIX: VIEWER ADDED -->
     <div class="foot">
       <div class="closing">
-        <div class="Bride-info">
+        <div class="bride-info">
           Bride Contact
           <p class="insta">
             <a href="https://www.instagram.com/tsi_meseret/">
