@@ -1198,27 +1198,25 @@ loop
     </div>
 
     <script type="module">
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
 
-  const music = document.getElementById("bgMusic");
+ const music = document.getElementById("bgMusic");
 
-  const savedTime = localStorage.getItem("musicTime");
+ if(localStorage.getItem("playMusic") === "yes"){
 
-  if (savedTime) {
-    music.currentTime = Number(savedTime);
-  }
+   music.volume = 0.5;
 
-  if (localStorage.getItem("playMusic") === "yes") {
+   try{
+      await music.play();
+      console.log("music playing");
+   }
+   catch(err){
+      console.log("browser blocked autoplay", err);
+   }
 
-    music.play()
-      .then(() => {
-        console.log("Music continued ❤️");
-      })
-      .catch(err => {
-        console.log("Music blocked", err);
-      });
+ }
 
-  }
+});
 
 
   // save position every second
