@@ -338,7 +338,11 @@
         const music = document.getElementById("bgMusic");
 
         // start music
-        music.play();
+      music.volume = 0.5;
+
+music.play().catch(err=>{
+    console.log(err);
+});
         // seal press effect
         seal.style.transform = "scale(0.85)";
         seal.style.transition = "0.2s";
@@ -352,9 +356,11 @@
       // go to next
 setTimeout(() => {
 
-  saveMusic(); // save music position before leaving
+saveMusic();
 
-  window.location.href = "page-01.html";
+music.pause();
+
+window.location.href = "page-01.html";
 
 }, 1100);
       }
@@ -375,9 +381,9 @@ setTimeout(() => {
 }
     </script>
 
-    <audio id="bgMusic" loop>
-      <source src="Lamesginih -Zema-4-Christ.m4a" type="audio/mp4" />
-    </audio>
+ <audio id="bgMusic" loop>
+    <source src="lamesginih-zema-4-christ.m4a" type="audio/mp4" loop>
+</audio>
 
     <div class="paper">
       <div class="card">
