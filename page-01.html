@@ -1201,47 +1201,36 @@ loop
     <script type="module">
 const music = document.getElementById("bgMusic");
 
-
 window.addEventListener("load", async () => {
 
-  if(localStorage.getItem("playMusic") === "yes"){
+    if (localStorage.getItem("playMusic") === "yes") {
 
-    music.volume = 0.5;
+        const savedTime = localStorage.getItem("musicTime");
 
-    let savedTime = localStorage.getItem("musicTime");
+        if (savedTime) {
+            music.currentTime = Number(savedTime);
+        }
 
-    if(savedTime){
-      music.currentTime = savedTime;
+        music.volume = 0.5;
+
+        try {
+            await music.play();
+            console.log("Music resumed");
+        } catch (err) {
+            console.log(err);
+        }
     }
-
-    try{
-      await music.play();
-      console.log("music playing");
-    }
-    catch(err){
-      console.log("autoplay blocked", err);
-    }
-
-  }
 
 });
 
-
-// save music position
 setInterval(() => {
 
-  if(!music.paused){
-    localStorage.setItem(
-      "musicTime",
-      music.currentTime
-    );
-  }
+    if (!music.paused) {
+        localStorage.setItem("musicTime", music.currentTime);
+    }
 
-},1000);
-
-
-});
-
+}, 1000);
+      
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
       import {
         getFirestore,
