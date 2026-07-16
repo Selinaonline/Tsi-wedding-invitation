@@ -332,39 +332,51 @@
         p.style.height = p.style.width;
         document.body.appendChild(p);
       }
-      function openInvitation() {
-        const card = document.querySelector(".card");
-        const seal = document.querySelector(".seal");
-        const music = document.getElementById("bgMusic");
+    function openInvitation(){
 
-        // start music
-      music.volume = 0.5;
+  const card = document.querySelector(".card");
+  const seal = document.querySelector(".seal");
+  const music = document.getElementById("bgMusic");
 
-music.play().catch(err=>{
-    console.log(err);
-});
-        // seal press effect
-        seal.style.transform = "scale(0.85)";
-        seal.style.transition = "0.2s";
+  music.volume = 0.5;
 
-        // open animation
-        setTimeout(() => {
-          card.classList.add("open");
-        }, 200);
+  music.play();
 
-        // go to next
-      // go to next
-setTimeout(() => {
+  seal.style.transform = "scale(0.85)";
 
-saveMusic();
+  setTimeout(() => {
+    card.classList.add("open");
+  },200);
 
 
+  setTimeout(()=>{
 
-window.location.href = "page-01.html";
+    saveMusic();
 
-}, 1100);
-      }
-      function saveMusic(){
+    music.pause();
+
+    window.location.href="page-01.html";
+
+  },1100);
+
+}
+
+
+function saveMusic(){
+
+  const music = document.getElementById("bgMusic");
+
+  localStorage.setItem(
+    "musicTime",
+    music.currentTime
+  );
+
+  localStorage.setItem(
+    "playMusic",
+    "yes"
+  );
+
+}      function saveMusic(){
 
   const music = document.getElementById("bgMusic");
 
