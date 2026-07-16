@@ -1203,26 +1203,32 @@ const music = document.getElementById("bgMusic");
 
 window.addEventListener("load", async () => {
 
+    const music = document.getElementById("bgMusic");
+
     if (localStorage.getItem("playMusic") === "yes") {
 
         const savedTime = localStorage.getItem("musicTime");
 
         if (savedTime) {
-            music.currentTime = Number(savedTime);
+            music.currentTime = parseFloat(savedTime);
         }
 
         music.volume = 0.5;
 
         try {
             await music.play();
-            console.log("Music resumed");
         } catch (err) {
             console.log(err);
         }
+
+        setInterval(() => {
+            if (!music.paused) {
+                localStorage.setItem("musicTime", music.currentTime);
+            }
+        }, 1000);
     }
 
 });
-
 setInterval(() => {
 
     if (!music.paused) {
