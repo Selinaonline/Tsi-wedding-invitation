@@ -1201,30 +1201,16 @@ loop>
     <script type="module">
 const music = document.getElementById("bgMusic");
 
-window.addEventListener("load", () => {
-
-    if(localStorage.getItem("playMusic") !== "yes") return;
-
+window.addEventListener("load", async () => {
     music.volume = 0.5;
 
-    music.addEventListener("loadedmetadata", async () => {
-
-        const savedTime = localStorage.getItem("musicTime");
-
-        if(savedTime){
-            music.currentTime = parseFloat(savedTime);
-        }
-
-        try{
-            await music.play();
-        }catch(err){
-            console.log(err);
-        }
-
-    });
-
+    try {
+        await music.play();
+        console.log("Music started");
+    } catch (err) {
+        console.log("Play failed:", err);
+    }
 });
-
 setInterval(() => {
 
     if(!music.paused){
