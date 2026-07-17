@@ -1201,24 +1201,23 @@ loop>
     <script type="module">
 const music = document.getElementById("bgMusic");
 
-window.addEventListener("load", async () => {
-    music.volume = 0.5;
+document.addEventListener("click", () => {
 
-    try {
-        await music.play();
-        console.log("Music started");
-    } catch (err) {
-        console.log("Play failed:", err);
+    if (music.paused) {
+
+        music.volume = 0.5;
+
+        music.play()
+        .then(() => {
+            console.log("Music started");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
     }
-});
-setInterval(() => {
 
-    if(!music.paused){
-        localStorage.setItem("musicTime", music.currentTime);
-    }
-
-},1000);
-      
+}, { once: true });      
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
       import {
         getFirestore,
