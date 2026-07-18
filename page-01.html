@@ -480,16 +480,7 @@ body {
         flex-direction: column;
       }
 
-      .made {
-        position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
-  color: rgb(24, 23, 23);
-  margin: 0;
-  white-space: nowrap;
-      }
+    
  
   .verse{
     width:90%;
@@ -563,47 +554,49 @@ body {
       
         color: #d4a373;
       }
-      .foot {
-        height: 300px;
+    
+      
+    .foot {
+  height: 300px;
   background-color: #506345;
   border-radius: 12px;
   position: relative;
   display: flex;
   align-items: center;
 }
-      }
-      .closing {
-        display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    position: relative;
-    padding: 0 60px;
-      }
-   .bride-info,
-.groom-info {
-      width: auto;
-    color: rgb(24, 23, 23);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Cormorant Garamond", serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 20px;
- 
-    margin-top: 20px;
-    white-space: nowrap;
+
+.closing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 80px;
 }
 
-.bride-info {
-    margin-left: 20px;
+.bride-info,
+.groom-info {
+  color: rgb(24,23,23);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
-.groom-info {
-    margin-right: 20px;
+.made {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:15px;
 }
+  
+
+
     
   
       .bride-info a:hover,
@@ -663,7 +656,7 @@ body {
 
       @media(max-width:600px){
     .closing {
-      
+      padding:0 15px;
     }
 
     .bride-info,
