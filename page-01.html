@@ -1225,14 +1225,19 @@ controls>
       const music = document.getElementById("bgMusic");
       
       // Modern browsers require a user interaction before audio plays
-      document.addEventListener("click", () => {
-        if (music && music.paused) {
-          music.volume = 0.5;
-          music.play()
-            .then(() => console.log("Music started successfully!"))
-            .catch(err => console.error("Audio playback failed:", err));
-        }
-      }, { once: true });      
+  document.addEventListener("click", function startMusic(){
+
+  music.volume = 0.5;
+
+  music.play()
+  .then(()=>{
+    console.log("Music started successfully!");
+  })
+  .catch(err=>{
+    console.log("Music failed:", err);
+  });
+
+}, {once:true});    
 
       const viewer = document.getElementById("viewer");
       const track = document.getElementById("track");
