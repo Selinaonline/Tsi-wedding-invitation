@@ -168,7 +168,7 @@ body {
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
-        scroll-snap-type: x proximity;
+        scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
       }
 
@@ -177,7 +177,8 @@ body {
         height: 80vh;
         object-fit: contain;
         flex: 0 0 100vw;
-        scroll-snap-align: start;
+        scroll-snap-align: center;
+         user-select:none;
       }
       .viewer-track::-webkit-scrollbar {
         display: none;
@@ -486,84 +487,51 @@ body {
         margin-top: 140px;
         margin-left: 100px;
       }
-    .verse-arch {
-  width: 100%;
-  max-width: 900px;
-  margin: 20px auto;
-}
-
-      .verse-arch svg {
-        width: 100%;
-        height: auto;
-      }
-
-      .verse-text {
-  font-family:"Cormorant Garamond",serif;
-  font-size:65px;
-  font-style:italic;
-  fill:#506345;
-}
-
-.psalm {
-  text-align: center;
-  font-family:"Cormorant Garamond",serif;
-  font-size:22px;
-  font-style:italic;
-  color:#506345;
  
-}
-      .verse {
-  width: 50%;
-  max-width: 800px;
-     
-        margin-bottom: 0;
-  margin: 40px auto;
-  text-align: center;
-  color: #d4af37;
-  font-family: "Cormorant Garamond", serif;
+  .verse{
+    width:90%;
+    max-width:700px;
+    margin:40px auto 30px;
+    text-align:center;
 }
 
-.verse p {
-  font-size: 18px;
-  font-style: italic;
- 
+.verse p{
+    font-family:"Cormorant Garamond", serif;
+    font-size:30px;
+    font-style:italic;
+    color:rgb(114,164,114);
+    line-height:1.6;
+    margin-bottom:12px;
 }
 
-.verse span {
-  display: block;
-  margin-top: 20px;
-  font-size: 14px;
+.verse span{
+    display:block;
+    font-family:"Cormorant Garamond", serif;
+    font-size:20px;
+    color:rgb(114,164,114);
+    letter-spacing:2px;
+}  
+   
+@media (max-width:600px){
+
+.verse{
+    width:92%;
+    margin-top:25px;
 }
 
-@media(max-width:900px){
+.verse p{
+    font-size:22px;
+    line-height:1.5;
+}
 
-  .verse p {
-    font-size: 18px;
-  }
-
-  .verse span {
-    font-size: 14px;
-  }
+.verse span{
+    font-size:16px;
+}
 
 }
-@media(max-width:600px){
 
-  .verse p {
-    font-size: 32px;
-  }
+      
 
-  .verse span {
-    font-size: 18px;
-  }
-
-}
-      @media(max-width:600px){
-
-  .verse-text{
-    font-size:40px;
-  }
-
-}
       .greet {
         margin-top: 80px;
       }
