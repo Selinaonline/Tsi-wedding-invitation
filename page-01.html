@@ -719,19 +719,19 @@ body {
       @media (max-width: 600px) {
 
   .foot {
-    width:100%;
-  height:auto;
-  padding:30px 15px;
+   display: flex;
+  flex-direction: column;
+  height: 180px;
+  background-color: #506345;
+  border-radius: 12px;
   }
 
   .closing {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
   }
 
 
@@ -745,10 +745,7 @@ body {
 
 
     .made {
-       display: block;
-  font-size: 15px;
-  color: rgb(24, 23, 23);
-  margin: 0;
+  margin: 0 0 10px;
   text-align: center;
 }
   
