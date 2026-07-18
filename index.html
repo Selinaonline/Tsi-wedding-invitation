@@ -313,6 +313,28 @@
         width: 100%;
         height: 100%;
       }
+      @media (max-width:600px){
+
+  .paper {
+    width: 90vw;
+    height: 85vh;
+  }
+
+  .seal-wrapper {
+    bottom: -15px;
+  }
+
+  .seal {
+    width: 70px;
+    height: 70px;
+    font-size:18px;
+  }
+
+  .seal-line {
+    width:40px;
+  }
+
+}
     </style>
   </head>
 
@@ -340,7 +362,9 @@
 
   music.volume = 0.5;
 
-  music.play();
+ music.play().catch(err=>{
+ console.log("Music blocked:",err);
+});
 
   seal.style.transform = "scale(0.85)";
 
