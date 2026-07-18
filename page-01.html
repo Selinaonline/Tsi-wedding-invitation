@@ -1318,7 +1318,7 @@ loop>
         images.forEach((src, i) => {
           const img = document.createElement("img");
           img.src = src;
-          img.loading = "lazy";
+          img.loading = "eager";
           if (i === currentIndex) {
             img.classList.add("active");
             img.loading = "eager";
