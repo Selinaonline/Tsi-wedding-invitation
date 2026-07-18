@@ -481,11 +481,14 @@ body {
       }
 
       .made {
-        font-size: 15px;
-        margin-left: 600px;
-        color: rgb(24, 23, 23);
-        margin-top: 140px;
-        margin-left: 100px;
+        position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  color: rgb(24, 23, 23);
+  margin: 0;
+  white-space: nowrap;
       }
  
   .verse{
@@ -561,22 +564,23 @@ body {
         color: #d4a373;
       }
       .foot {
-        display: flex;
-        flex-direction: row;
         height: 180px;
-        align-items: center;
-        border-color: black;
-        background-color: #506345;
-        border-radius: 12px;
+  background-color: #506345;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
       }
       .closing {
         display: flex;
-
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
       }
       .bride-info {
+        margin-left: 40px;
+         width: 33.33%;
         color: rgb(24, 23, 23);
         display: flex;
         flex-direction: column;
@@ -590,6 +594,7 @@ body {
         font-size: 20px;
       }
       .groom-info {
+         width: 33.33%;
         color: rgb(24, 23, 23);
         display: flex;
         flex-direction: column;
@@ -669,6 +674,11 @@ body {
 }
 
 
+}
+      @media(max-width:600px){
+  .made {
+    display:none;
+  }
 }
       @media (max-width: 600px) {
         .storyy {
