@@ -1198,26 +1198,8 @@ loop>
       </div>
     </div>
 
-    <script type="module">
-const music = document.getElementById("bgMusic");
-
-document.addEventListener("click", () => {
-
-    if (music.paused) {
-
-        music.volume = 0.5;
-
-        music.play()
-        .then(() => {
-            console.log("Music started");
-        })
-        .catch(err => {
-            console.log(err);
-        });
-
-    }
-
-}, { once: true });      
+   
+<script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
       import {
         getFirestore,
@@ -1235,47 +1217,41 @@ document.addEventListener("click", () => {
       };
 
       const app = initializeApp(firebaseConfig);
-
       const db = getFirestore(app);
+
+      // AUDIO PLAYBACK LOGIC
+      const music = document.getElementById("bgMusic");
+      
+      // Modern browsers require a user interaction before audio plays
+      document.addEventListener("click", () => {
+        if (music && music.paused) {
+          music.volume = 0.5;
+          music.play()
+            .then(() => console.log("Music started successfully!"))
+            .catch(err => console.error("Audio playback failed:", err));
+        }
+      }, { once: true });      
+
       const viewer = document.getElementById("viewer");
       const track = document.getElementById("track");
 
       const images = [
-        "1.JPG",
-        "2.JPG",
-        "3.JPG",
-        "4.JPG",
-        "5.JPG",
-        "6.JPG",
-        "7.JPG",
-        "8.JPG",
-        "9.JPG",
-        "10.JPG",
-        "11.JPG",
-        "12.JPG",
-        "13.JPG",
+        "1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG", 
+        "6.JPG", "7.JPG", "8.JPG", "9.JPG", "10.JPG", 
+        "11.JPG", "12.JPG", "13.JPG"
       ];
-      images.forEach((src,i)=>{
- const img=document.createElement("img");
- img.src=src;
- track.appendChild(img);
-});
 
       let currentIndex = 0;
       const gridImages = document.querySelectorAll(".thumb");
 
       /* =========================
-   IMAGE VIEWER
-========================= */
-
+         IMAGE VIEWER
+      ========================= */
       function openViewer(index) {
         currentIndex = index;
-
         viewer.style.display = "block";
         document.body.style.overflow = "hidden";
-
         buildViewer();
-
         scrollToImage(index);
       }
 
@@ -1284,70 +1260,45 @@ document.addEventListener("click", () => {
         document.body.style.overflow = "auto";
       }
 
-     function buildViewer() {
-  track.innerHTML = "";
-
-  images.forEach((src, i) => {
-    const img = document.createElement("img");
-
-    img.src = src;
-    img.loading = "lazy";   // 👈 put it here
-
-    if (i === currentIndex) {
-      img.classList.add("active");
-      img.loading = "eager"; // load the first opened image immediately
-    }
-
-    track.appendChild(img);
-  });
-
-  enableScrollTracking();
-}
+      function buildViewer() {
+        track.innerHTML = "";
+        images.forEach((src, i) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.loading = "lazy";
+          if (i === currentIndex) {
+            img.classList.add("active");
+            img.loading = "eager";
+          }
+          track.appendChild(img);
+        });
+        enableScrollTracking();
+      }
 
       function scrollToImage(index) {
         const imgs = track.querySelectorAll("img");
         const target = imgs[index];
         if (!target) return;
-
-        target.scrollIntoView({
-          inline: "center",
-        });
+        target.scrollIntoView({ inline: "center" });
       }
 
-     function enableScrollTracking() {
-
-  let timer;
-
-  track.onscroll = () => {
-
-    clearTimeout(timer);
-
-    timer = setTimeout(() => {
-
-      const index = Math.round(
-        track.scrollLeft / window.innerWidth
-      );
-
-      const imgs = track.querySelectorAll("img");
-
-      imgs.forEach(img => {
-        img.classList.remove("active");
-      });
-
-      if(imgs[index]){
-        imgs[index].classList.add("active");
+      function enableScrollTracking() {
+        let timer;
+        track.onscroll = () => {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            const index = Math.round(track.scrollLeft / window.innerWidth);
+            const imgs = track.querySelectorAll("img");
+            imgs.forEach(img => img.classList.remove("active"));
+            if (imgs[index]) imgs[index].classList.add("active");
+            currentIndex = index;
+          }, 100);
+        };
       }
 
-      currentIndex = index;
-
-    }, 100);
-
-  };
-}
       /* =========================
-   CLICK HANDLERS
-========================= */
-
+         CLICK HANDLERS & EVENT LISTENERS
+      ========================= */
       gridImages.forEach((img, index) => {
         img.addEventListener("click", () => openViewer(index));
       });
@@ -1359,9 +1310,8 @@ document.addEventListener("click", () => {
       }
 
       /* =========================
-   COUNTDOWN (SAFE)
-========================= */
-
+         COUNTDOWN
+      ========================= */
       const weddingDate = new Date("2026-08-01T10:00:00").getTime();
 
       function updateCountdown() {
@@ -1369,38 +1319,31 @@ document.addEventListener("click", () => {
         let diff = weddingDate - now;
 
         if (diff <= 0) {
-          document.getElementById("fullCountdown").innerHTML =
-            "🎉 The day has arrived!";
+          document.getElementById("fullCountdown").innerHTML = "🎉 The day has arrived!";
           return;
         }
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         document.getElementById("fullCountdown").innerHTML =
-          days +
-          " days : " +
-          hours +
-          " hours : " +
-          minutes +
-          " minutes : " +
-          seconds +
-          " seconds";
+          `${days} days : ${hours} hours : ${minutes} minutes : ${seconds} seconds`;
       }
 
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      updateCountdown();
+      /* =========================
+         RSVP & INTERACTION FUNCTIONS
+      ========================= */
       function checkSide() {
-        const side = document.querySelector('input[name="side"]:checked').value;
+        const sideInput = document.querySelector('input[name="side"]:checked');
         const funBox = document.getElementById("funQuestion");
+        if (!sideInput || !funBox) return;
 
-        if (side === "Bride") {
+        if (sideInput.value === "Bride") {
           funBox.classList.add("show");
           funBox.classList.remove("hidden");
         } else {
@@ -1410,22 +1353,12 @@ document.addEventListener("click", () => {
           }, 300);
         }
       }
-      function scrollLeft() {
-        document.getElementById("carousel").scrollBy({
-          left: -400,
-          behavior: "smooth",
-        });
-      }
 
       async function submitRSVP() {
         let name = document.getElementById("name").value;
-
         let attend = document.querySelector('input[name="attend"]:checked');
-
         let side = document.querySelector('input[name="side"]:checked');
-
         let funAnswer = document.getElementById("funAnswer").value;
-
         let message = document.getElementById("message").value;
 
         if (name === "" || !attend || !side) {
@@ -1435,27 +1368,31 @@ document.addEventListener("click", () => {
 
         let rsvpData = {
           name: name,
-
           attendance: attend.value,
-
           side: side.value,
-
           funAnswer: funAnswer,
-
           message: message,
         };
 
-        await addDoc(collection(db, "rsvps"), rsvpData);
-
-        document.getElementById("successMessage").classList.add("show");
-
-        document.getElementById("name").value = "";
-        document.getElementById("message").value = "";
+        try {
+          await addDoc(collection(db, "rsvps"), rsvpData);
+          document.getElementById("successMessage").classList.add("show");
+          document.getElementById("name").value = "";
+          document.getElementById("message").value = "";
+          document.getElementById("funAnswer").value = "";
+        } catch (error) {
+          console.error("Error saving RSVP:", error);
+          alert("Something went wrong. Please try again.");
+        }
       }
-      window.checkSide = checkSide;
-      window.submitRSVP = submitRSVP;
+
+      // CRITICAL FIX: Expose functions to the window so your HTML elements can find them
       window.openViewer = openViewer;
       window.closeViewer = closeViewer;
+      window.checkSide = checkSide;
+      window.submitRSVP = submitRSVP;
     </script>
+  </body>
+</html>    
   </body>
 </html>
