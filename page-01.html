@@ -542,8 +542,11 @@ body {
       /* Bride on the left */
       .bride-info a,
       .groom-info a {
-        display: block;
+        display: flex;
         color: rgb(239, 228, 228);
+           align-items:center;
+    justify-content:center;
+    gap:8px;
         text-decoration: none;
         font-size: 22px;
         margin: 10px 0;
@@ -553,11 +556,8 @@ body {
       /* Align only the icons inside the links */
       .bride-info a i,
       .groom-info a i {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 22px;
-        margin-right: 8px;
+         font-size:20px;
+      
         color: #d4a373;
       }
       .foot {
