@@ -553,7 +553,7 @@ body {
 }    
       
     .foot {
-  height: 300px;
+  height: 280px;
   background-color: #506345;
   border-radius: 12px;
   position: relative;
@@ -570,7 +570,16 @@ body {
   padding: 0 80px;
 }
 
-.bride-info,
+.bride-info{
+    display: flex;
+  flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
+}
 .groom-info {
 
   display: flex;
@@ -596,7 +605,10 @@ body {
 
     
   
-      .bride-info a:hover,
+      .bride-info a:hover{
+        
+        transform: translateY(-2px);
+      }
       .groom-info a:hover {
         
         transform: translateY(-2px);
@@ -713,7 +725,7 @@ body {
 @media (max-width:600px){
 
   .foot{
-    height:220px;
+    height:200px;
   }
 
   .closing{
@@ -724,7 +736,7 @@ body {
   }
 
   .bride-info{
-    margin-right:10px;
+    
        width:auto;
     font-size:15px;
     margin:0;
@@ -1208,7 +1220,7 @@ loop>
     <!-- FIX: VIEWER ADDED -->
  <div class="foot">
       <div class="closing">
-        <div class="Bride-info">
+        <div class="bride-info">
           Bride Contact
           <p class="insta">
             <a href="https://www.instagram.com/tsi_meseret/">
