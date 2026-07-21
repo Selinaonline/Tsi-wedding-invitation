@@ -505,6 +505,7 @@ body {
     color:rgb(114,164,114);
     letter-spacing:2px;
 }  
+.
    
 @media (max-width:600px){
 
@@ -534,93 +535,12 @@ body {
         margin-bottom: 120px;
       }
       /* Bride on the left */
-   .bride-info a,
-.groom-info a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: rgb(24, 23, 23);
-    text-decoration: none;
-}
 
-.bride-info a i,
-.groom-info a i {
-    width: 18px;
-  height:17px;
-  margin:0;
-    text-align: center;
-   color: rgb(24, 23, 23);
-    font-size: 16px;
-  border-radius:7px;
-  
-}    
-      
-    .foot {
-  height: 280px;
-  background-color: #506345;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
 
-.closing {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 80px;
-}
 
-.bride-info{
-    display: flex;
-  flex-direction: column;
-   justify-content: flex-start;
-   align-items: center;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 20px;
-}
-.groom-info {
-
-  display: flex;
-  flex-direction: column;
-   justify-content: flex-start;
-   align-items: center;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 20px;
-  
-}
-
-.made {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size:15px;
-}
   
 
 
-    
-  
-      .bride-info a:hover{
-        
-        transform: translateY(-2px);
-      }
-      .groom-info a:hover {
-        
-        transform: translateY(-2px);
-      }
-      .phone a {
-        color: rgb(24, 23, 23);
-        text-decoration: none;
-      }
       .success-message {
         display: none;
         margin-top: 20px;
@@ -664,20 +584,84 @@ body {
   font-size:17px;
 
 }
-
-
-
-      @media(max-width:600px){
-    .closing {
-      padding:0 15px;
-    }
-
-    .bride-info,
-    .groom-info {
-        font-size:14px;
-    }
+.foot {
+  height: 250px;
+  background-color: #506345;
+  border-radius: 12px;
+  position: relative;
 }
-   
+
+
+.closing {
+  height:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:35px 80px;
+}
+
+
+.contact-box {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-family:"Cormorant Garamond", serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:20px;
+}
+
+
+.contact-box h3 {
+  margin-bottom:15px;
+}
+
+.fa-instagram {
+   border-radius: 7px;
+    height: 18px;
+ 
+}
+.contact-box a {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:rgb(24,23,23);
+  margin:5px 0;
+}
+
+
+.social-icon {
+  width:18px;
+  height:18px;
+  object-fit:contain;
+}
+
+
+.made {
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:15px;
+  white-space:nowrap;
+}
+@media(max-width:600px){
+
+  .closing{
+    padding:25px 15px;
+  }
+
+  .contact-box{
+    font-size:15px;
+  }
+
+  .made{
+    font-size:12px;
+  }
+
+}
+
 
       @media (max-width: 600px) {
         .storyy {
@@ -724,92 +708,6 @@ body {
     padding: 0 15px;
   }
 
-}
-    
-@media (max-width:600px){
-.foot{
-
- height:auto;
-    padding:20px 15px 50px;
-  }
-
-  .closing{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-  
-  }
-
-  .bride-info,
-  .groom-info{
-    
-    font-size:15px;
-
-  }
-
-  .bride-info a,
-  .groom-info a{
-    font-size:13px;
-
-    text-decoration:none;
-    gap:6px;
-  }
-
-  .made{
-      bottom:8px;
-  }
-
-}
-    
-.insta-icon{
-    width:20px;
-    height:20px;
-    display:block;
-}
-.insta a,
-.phone a{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-
-
-.bride-info .insta,
-.bride-info .phone,
-.groom-info .insta,
-.groom-info .phone {
-    margin: 3px 0;
-  border-radius: 7px;
-  
-    color: rgb(24, 23, 23);
-}
-      .bride-info .insta a,
-.groom-info .insta a,
-.bride-info .phone a,
-.groom-info .phone a {
-    color: rgb(24, 23, 23) !important;
-  font-size:15px;
-  font-weight:bold;
-    text-decoration: none;
-}
-@media (max-width:768px){
-
-section div[style*="display: flex"]{
-    flex-direction:column !important;
-    gap:30px !important;
-}
-
-}
-.bride-info .insta a {
-    color: rgb(24, 23, 23) !important;
-    text-decoration: none;
-}
-
-.groom-info .insta a {
-    color: rgb(24, 23, 23) !important;
-    text-decoration: none;
-}
 
 
    @media(max-width:600px){
@@ -1210,40 +1108,47 @@ loop>
     </div>
 
     <!-- FIX: VIEWER ADDED -->
- <div class="foot">
-      <div class="closing">
-        <div class="bride-info">
-          Bride Contact
-          <p class="insta">
-            <a href="https://www.instagram.com/tsi_meseret/">
-              <img class="insta" src="insta.jpg" alt="Instagram" />
-             
-              @tsi_meseret
-            </a>  
-          </p>
-          <p class="phone">
-            <a href="tel:+251911234567">
-              <i class="fa-solid fa-phone"></i> 📞 +251923112148
-            </a>
-          </p>
-        </div>
-        <p class="made">© 2026 Tsion & Dave Wedding. Made with ❤️</p>
-        <div class="groom-info">
-          Groom Contact
-          <p class="insta">
-            <a href="https://www.instagram.com/davedc_d/">
-              <img class="insta" src="insta.jpg" alt="Instagram" />
-              @davedc_d
-            </a>
-          </p>
-          <p class="phone">
-            <a href="tel:+251911234567">
-              <i class="fa-solid fa-phone"></i> 📞 +251923112148
-            </a>
-          </p>
-        </div>
-      </div>
+<div class="foot">
+
+  <div class="closing">
+
+    <div class="contact-box bride-info">
+      <h3>Bride Contact</h3>
+
+      <a href="https://www.instagram.com/tsi_meseret/">
+        <img src="insta.jpg" class="social-icon" alt="Instagram">
+        <span>@tsi_meseret</span>
+      </a>
+
+      <a href="tel:+251923112148">
+        <i class="fa-solid fa-phone social-icon"></i>
+        <span>+251923112148</span>
+      </a>
     </div>
+
+
+    <div class="contact-box groom-info">
+      <h3>Groom Contact</h3>
+
+      <a href="https://www.instagram.com/davedc_d/">
+        <img src="insta.jpg" class="social-icon" alt="Instagram">
+        <span>@davedc_d</span>
+      </a>
+
+      <a href="tel:+251923112148">
+        <i class="fa-solid fa-phone social-icon"></i>
+        <span>+251923112148</span>
+      </a>
+    </div>
+
+
+    <p class="made">
+      © 2026 Tsion & Dave Wedding. Made with ❤️
+    </p>
+
+  </div>
+
+</div>
 
    
 <script type="module">
