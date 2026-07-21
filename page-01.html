@@ -589,15 +589,17 @@ body {
   background-color: #506345;
   border-radius: 12px;
   position: relative;
+  display: flex;
+  align-items: flex-start;
 }
 
 
 .closing {
-  height:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  padding:35px 80px;
+   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 30px 80px;
 }
 
 
@@ -645,7 +647,7 @@ body {
   left:50%;
   transform:translateX(-50%);
   font-size:15px;
-  white-space:nowrap;
+ 
 }
 @media(max-width:600px){
   .foot {
