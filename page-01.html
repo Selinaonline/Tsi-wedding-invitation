@@ -651,10 +651,13 @@ body {
 }
 @media(max-width:600px){
   .foot {
-    height: 160px;
+    height: 190px;
   }
   .closing{
-    padding:15px 10px;
+       display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:15px;
   }
 
   .contact-box{
@@ -664,7 +667,12 @@ body {
   }
 
  .made{
-    bottom:0;
+     position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:12px;
+    white-space:nowrap;
   }
 
 }
