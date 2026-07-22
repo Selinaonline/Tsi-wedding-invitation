@@ -506,7 +506,19 @@ body {
     letter-spacing:2px;
 }  
 
-   
+.time-lineall {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    width: 100%;
+}
+
+.timeline,
+.amharic-timeline {
+    flex: 1;
+    max-width: 500px;
+}   
 @media (max-width:600px){
 
 .verse{
@@ -526,7 +538,19 @@ body {
 
 }
 
-      
+@media (max-width: 768px) {
+    .time-lineall {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .timeline,
+    .amharic-timeline {
+        width: 100%;
+        max-width: 100%;
+    }
+}      
 
       .greet {
         margin-top: 80px;
@@ -652,6 +676,7 @@ body {
     font-size: 12px;
  
 }
+   
 @media(max-width:600px){
   .foot {
     height: 190px;
@@ -926,8 +951,9 @@ loop>
 
     <section>
       <section>
+     
         <div class="title">Wedding Timeline</div>
-
+   <div class="time-lineall">
         <div class="timeline">
           <div class="t-item left">
             <div class="dot"></div>
@@ -955,6 +981,33 @@ loop>
 
          
         </div>
+     <div class="amharic-timeline">
+         <div class="t-item left">
+            <div class="dot"></div>
+            <div class="content">
+              💒 Church Program <br />
+              <span> 3:00 PM- 5:30 PM </span>
+            </div>
+          </div>
+
+          <div class="t-item right">
+            <div class="dot"></div>
+            <div class="content">
+              📸 Photos Session<br />
+              <span>5:30 PM- 6:00 PM </span>
+            </div>
+          </div>
+
+          <div class="t-item left">
+            <div class="dot"></div>
+            <div class="content">
+              🍽️ Dinner<br />
+              <span>6:00 PM - 10:00 PM</span>
+            </div>
+          </div>
+
+     </div>
+   </div>
       </section>
     </section>
 
