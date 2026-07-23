@@ -579,6 +579,63 @@ body {
   color:#506345;
   font-size:30px;
 }
+      .amharic-timeline {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.am-item {
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 35px;
+}
+
+
+.am-dot {
+    position: absolute;
+    left: 15px;
+    top: 30px;
+
+    width: 14px;
+    height: 14px;
+    background: #506345;
+    border-radius: 50%;
+}
+
+
+.am-box {
+    width: 100%;
+    min-height: 100px;
+
+    padding: 20px;
+
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #506345;
+    border-radius: 15px;
+
+    font-family: "Noto Sans Ethiopic", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+.am-box span {
+    display: block;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+
+.am-location {
+    text-align: right;
+    margin-top: 10px;
+
+    font-size: 15px;
+    color: #506345;
+}
 @media (max-width:600px){
 
 .verse{
@@ -1055,48 +1112,55 @@ loop>
 
          
         </div>
-     <p class="amargna"> የእለቱ ፕሮግራም</p>
-     <div class="amharic-timeline">
-         <div class="t-item left">
-            <div class="dot"></div>
-            <div class="content">
-              💒  የቃልኪዳን ፕሮግራም <br />
-              <span> 9:00 - 11:30  </span>
-                <div class="event-location">
-  📍ገርጂ አማኑኤል ቤተክርስትያን
-</div>
-          </div>
-         </div>
-          <div class="t-item right">
-            <div class="dot"></div>
-            <div class="content">
-              📸የፎቶ ፕሮግራም<br />
-              <span>11:30 - 12:00  </span>
-            </div>
-          </div>
+  <p class="amargna">የእለቱ ፕሮግራም</p>
 
-       <div class="t-item left">
-  <div class="dot"></div>
+<div class="amharic-timeline">
 
-  <div class="content">
-    🍽️ የእራት ፕሮግራም <br>
-    <span>12:00 - 4:00</span>
-      <div class="event-location">
-   📍 ዮሐንስ ክትፎ
-    <br>
-    <a class="map-button" href="https://www.google.com/maps/place/Yohannes+Kitfo+%7C+Haya+Hulet+%7C+%E1%8B%AC%E1%88%80%E1%8A%95%E1%88%B5+%E1%8A%AD%E1%89%B5%E1%8D%8E+%7C+%E1%88%83%E1%8B%AB+%E1%88%81%E1%88%88%E1%89%B5/@9.0107352,38.7817661,17z"
-     target="_blank">
-      🗺️ Use Google Maps
-    </a>
+  <div class="am-item">
+    <div class="am-dot"></div>
+
+    <div class="am-box">
+      💒 የቃልኪዳን ፕሮግራም
+      <span>9:00 - 11:30</span>
+    </div>
+
+    <div class="am-location">
+      📍 ገርጂ አማኑኤል ቤተክርስትያን
+    </div>
   </div>
-  </div>
-        
 
- 
+
+  <div class="am-item">
+    <div class="am-dot"></div>
+
+    <div class="am-box">
+      📸 የፎቶ ፕሮግራም
+      <span>11:30 - 12:00</span>
+    </div>
+
+  </div>
+
+
+  <div class="am-item">
+    <div class="am-dot"></div>
+
+    <div class="am-box">
+      🍽️ የእራት ፕሮግራም
+      <span>12:00 - 4:00</span>
+    </div>
+
+    <div class="am-location">
+      📍 ዮሐንስ ክትፎ
+      <br>
+      <a class="map-button" href="YOUR_LINK" target="_blank">
+        📍 Use Google Map
+      </a>
+    </div>
+
+  </div>
 
 </div>
-
-     </div>
+   </div>
    </div>
       </section>
     </section>
