@@ -581,12 +581,15 @@ body {
 }
       .amharic-timeline {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
+        
 }
 
 .am-item {
     position: relative;
+    width: 100%;
+    padding-left: 40px;
     padding-left: 45px;
     margin-bottom: 35px;
 }
@@ -609,7 +612,7 @@ body {
     min-height: 100px;
      color:#506345;
     padding: 20px;
-
+ box-sizing: border-box;
     background: rgba(255,255,255,0.05);
     border: 1px solid #506345;
     border-radius: 15px;
@@ -909,6 +912,21 @@ body {
       padding:8px 16px;
   }
 
+}
+        @media(max-width:600px){
+
+    .amharic-timeline {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .am-item {
+        padding-left: 25px;
+    }
+
+    .am-box {
+        width: 100%;
+    }
 }
     
     </style>
